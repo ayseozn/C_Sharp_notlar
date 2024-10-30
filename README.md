@@ -85,7 +85,7 @@ Kayan noktalı bir sayı, aynı zamanda 10'un kuvvetini belirtmek için "e" ile 
 
 ## Type Conversion Methods (Tür Dönüştürme Yöntemleri)
 
-Convert.ToBoolean, Convert.ToDouble, Convert.ToString, Convert.ToInt32( int), Convert.ToInt64( )
+```Convert.ToBoolean```, ```Convert.ToDouble```, ```Convert.ToString```, ```Convert.ToInt32(int)```, ```Convert.ToInt64()```
 
 ```C#
 int myInt = 10;
@@ -104,9 +104,47 @@ Console.WriteLine("Enter your age:");
 int age = Console.ReadLine(); //yanlış kullanım
 int age = Convert.ToInt32(Console.ReadLine()); // doğru kullanım
 ```
-yanlış bir girdi
+hatalı tür dönüşümü durumdalarında exception fırlatır.
+
+## Operatörler
+
+Aritmetik Operatörler:
+- ```+``` : x + y;
+- ```-``` : x - y;
+- ```*``` : x * y; 
+- ```/``` : x / y; (bölme)
+- ```%``` : x % y; (bölme işleminin kalanı)
+- ```++``` : x++; 1 arttırır
+- ```--``` : x--; 1 azaltır
+  
+Atama Operatörleri:
+- ```=``` : x = 10; atama operatörü
+- ```+=``` : x += 5; toplama atama operatörü (x = x + 5)
+- ```-=``` : x -= 5; çıkartma atama operatörü
+- ```*=``` : x *= 3;    (x = x * 3)
+- ```/=``` : x /= 3;    (x = x / 3)
+- ```%=``` : x %= 3;    (x = x % 3)
+- ```&=``` : x &= 3;    (x = x & 3)
+- ```|=``` : 	x |= 3;   (x = x | 3)
+- ```^=``` : x ^= 3;    (x = x ^ 3)
+- ```>>=``` : x >>= 3;   (x = x >> 3)
+- ```<<=``` : 	x <<= 3;   (x = x << 3)
+
+Karşılaştırma Operatörleri:
+- ```==``` : eşit
+- ```!=``` : eşit değil
+- ```>``` : büyüktür
+- ```<``` : küçüktür
+- ```>=``` : büyük eşit
+- ```<=``` : küçük eşit
+
+Mantıksal Operatörler:
+- ```&&``` : mantıksal ve operatörü
+- ```||``` : mantıksal yada operatörü
+- ```!``` : mantıksal değil operatörü
 
 
+## Matematik
 
 
 
