@@ -146,6 +146,106 @@ Mantıksal Operatörler:
 
 ## Matematik
 
+Max : x ve y'nin en büyük değerini bulmak için kullanılır.
+
+```C#
+Math.Max(5, 10);
+```
+
+Min : x ve y'nin en küçük değerini bulmak için kullanılır.
+
+```C#
+Math.Min(5, 10);
+```
+
+Sqrt (karekök) : x'in karekökünü döndürür.
+
+```C#
+Math.Sqrt(64);
+```
+
+Abs (mutlak değer) : x'in mutlak değerini döner.
+
+```C#
+Math.Abs(-4.7);
+```
+
+Round (yuvarlama) : bir sayıyı en yakın sayıya yuvarlar.
+
+```C#
+Math.Round(9.99);
+```
+
+## Strings (Dizeler)
+
+Çift tırnak işaretiyle çevrelenmiş bir karakter koleksiyonunu içerir:
+
+```C#
+string greeting = "Hello";
+```
+
+Lenght : Dizenin uzunluğunu bulmak için kullanılır.
+
+ToUpper : Dizenin harflerini büyük harf yapar.
+
+ToLower : Dizenin harflerini küçük harf yapar.
+
+```C#
+string txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+Console.WriteLine("The length of the txt string is: " + txt.Length);
+
+Console.WriteLine(txt.ToUpper());
+Console.WriteLine(txt.ToLower());
+```
+
+#### String Concatenation (Dize Bağlantısı) :
+'+' ve string.Concat() iki dizeyi birleştirmek için kullanılır.
+
+```C#
+string firstName = "John ";
+string lastName = "Doe";
+string name = firstName + lastName;
+Console.WriteLine(name);
+string name2 = string.Concat(firstName, lastName);
+Console.WriteLine(name2);
+```
+
+#### String Interpolation :
+Değişkenlerin ve ifadelerin doğrudan bir dize içine gömülerek kullanılmasını sağlayan bir özelliktir.  C# 6 ve sonrası sürümlerde kullanılır.
+
+Süslü parantezler içinde yalnızca değişken değil, aynı zamanda işlemler veya ifadeler de kullanılabilir.
+
+$ işareti unutmamalıdır.
+
+```C#
+//String Interpolation
+string isim = "Ahmet";
+int yas = 25;
+string mesaj = $"Merhaba, benim adım {isim} ve {yas} yaşındayım.";
+Console.WriteLine(mesaj); //çıktı: Merhaba, benim adım Ahmet ve 25 yaşındayım.
+
+DateTime bugun = DateTime.Now;
+Console.WriteLine($"Bugünün tarihi: {bugun:dd/MM/yyyy}"); // Çıktı: Bugünün tarihi: 23/10/2024
+
+double fiyat = 99.99;
+Console.WriteLine($"Ürün fiyatı: {fiyat:C}"); // Çıktı: Ürün fiyatı: ₺99.99
+
+int a = 10, b = 20;
+Console.WriteLine($"a + b = {a + b}"); // Çıktı: a + b = 30
+```
+
+#### Access Strings : 
+dizedeki bir karaktere erişim de [] kullanılır. karakterin dizindeki konumu ``IndexOf()`` kullanılır.
+
+```C#
+string myString = "Hello";
+Console.WriteLine(myString[0]);
+
+```
+
+
+
+
 
 
 
