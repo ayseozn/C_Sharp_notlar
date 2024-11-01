@@ -235,17 +235,111 @@ Console.WriteLine($"a + b = {a + b}"); // Çıktı: a + b = 30
 ```
 
 #### Access Strings : 
-dizedeki bir karaktere erişim de [] kullanılır. karakterin dizindeki konumu ``IndexOf()`` kullanılır.
+dizedeki bir karaktere erişim de [] kullanılır. karakterin dizindeki konumu bulmak için ``IndexOf()`` kullanılır.
 
+Substring(); methodu bir dizeden belirli bir alt dizeyi almak için kullanılır.
+ 
 ```C#
 string myString = "Hello";
 Console.WriteLine(myString[0]);
+Console.WriteLine(myString.IndexOf("l")); // çıktı 2 olur
 
+string metin = "Programlama";
+string altDize = metin.Substring(6); // "lama"
+
+int charPos = metin.IndexOf("g");
+string lastName = name.Substring(charPos);
+Console.WriteLine(lastName); //çıktı:ramlama
 ```
 
+#### Special Characters (özel karakterler)
+
+- \'
+- \"
+- \\
+- \n : yeni satır.
+- \t : tab atar.
+- \b :
+
+## Booleans
+sadece True ve False değeri alabilir.
+
+True / False
+
+## if .. else
+
+if true koşulunu sağladığında if bloğu içerisindeki kod çalışır.
+
+else if: if koşulu false ile yeni koşul belirtmek için kullanılır.
+
+else:  if veya else if koşulu true olmadığı durumda çalışır. her zaman kullanmak zorunlu deildir. else if olmadan sadece if ilede kullanılır.
+
+```C#
+if (20 > 18) 
+{
+  Console.WriteLine("20 is greater than 18");
+}
+else if(20 < 18)
+{
+  Console.WriteLine(if false ile girer);
+}
+else
+{
+  Console.WriteLine("if ve elseif koşulu sağlanmadı");
+}
+```
+
+#### Short Hand If...Else
+
+```C#
+variable = (condition) ? expressionTrue :  expressionFalse;
+```
+
+## Switch Statements
+
+```C#
+/*
+switch(expression) 
+{
+  case x:
+    // code block
+    break;
+  case y:
+    // code block
+    break;
+  default:
+    // code block
+    break;
+} */
+
+int day = 4;
+switch (day) 
+{
+  case 1:
+    Console.WriteLine("Monday");
+    break;
+  case 2:
+    Console.WriteLine("Tuesday");
+    break;
+  case 3:
+    Console.WriteLine("Wednesday");
+    break;
+  case 4:
+    Console.WriteLine("Thursday");
+    break;
+  case 5:
+    Console.WriteLine("Friday");
+    break;
+  case 6:
+    Console.WriteLine("Saturday");
+    break;
+  case 7:
+    Console.WriteLine("Sunday");
+    break;
+}
 
 
-
+```
 
 
 
