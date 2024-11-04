@@ -674,27 +674,134 @@ static void Main(string[] args)
 }
 ```
 # OOP(Nesne Yönelimli Programlama)
+
+##### Prosedürel Programlama:
+Prosedürel programlama, işlemleri ve veriyi ayrı tutan bir programlama paradigmasıdır. Program, bir dizi prosedür veya fonksiyon olarak organize edilir. Basit ve küçük projelerde kullanımı kolaydır. Kodun yeniden kullanımı ve bakımı zor.
+### OOP nedir:
 İşlemsel programlama, veriler üzerinde işlemler gerçekleştiren prosedürler veya yöntemler yazmakla ilgilidir; nesne yönelimli programlama ise hem verileri hem de yöntemleri içeren nesneler oluşturmakla ilgilidir.
 
-##### OOP/Prosedürel Programlama:
-- OOP daha hızlı ve yürütülmesi daha kolaydır.
+Yapı: Program, sınıflar ve nesneler kullanılarak organize edilir. sınıflar, nesnelerin özelliklerini ve davranışlarını tanımlar.
 
+Avantajlar:
+- kodun yeniden kullanımı kolaydır.(örn: kalıtım yoluyla)
+- Kapsülleme, veriyi koruma ve kontrol etme imkanı sağlar.
+
+Dezavantaj:
+- prosedürel programlamaya göre daha karmaşıktır. küçük projelerde OOP bazen gereğinden fazla karmaşa oluşturabilir.
 
 #### OOP kavramlar:
-- Class(Sınıf): Nesnelerin yapısını ve davranışını tanımlayan bir şablon.
-- Nesne(Object): Sınıfların örneğidir. Sınıfta tanımlanan özelliklere ve methodlara sahiptir.
-- Kapsülleme(Encapsulation): Verilerin ve metotların bir sınıf içinde bir araya getirilmesi.
-- Kalıtım(Inheritance): Bir sınıfın başka bir sınıftan türetilmesi, böylece miras alması.
-- Polimorfizm(Polymorphism): Aynı method adının farklı şekillerde kullanılması.
-- Soyutlama(Abstraction): Karmaşıklığı gizleyip sadece gerekli olan kısımların ortaya çıkarılması
+- ``Class(Sınıf)``: Nesnelerin yapısını ve davranışını tanımlayan bir şablon.
+- ``Nesne(Object)``: Sınıfların örneğidir. Sınıfta tanımlanan özelliklere ve methodlara sahiptir.
+- ``Kapsülleme(Encapsulation)``: Verilerin ve metotların bir sınıf içinde bir araya getirilmesi.
+- ``Kalıtım(Inheritance)``: Bir sınıfın başka bir sınıftan türetilmesi, böylece miras alması.
+- ``Polimorfizm(Polymorphism)``: Aynı method adının farklı şekillerde kullanılması.
+- ``Soyutlama(Abstraction)``: Karmaşıklığı gizleyip sadece gerekli olan kısımların ortaya çıkarılması
 
+## Sınıflar ve Nesneler Nelerdir?
+Sınıf, nesneler için bir şablondur ve bir nesne de bir sınıfın örneğidir. Bireysel nesne oluşturulduğunda, sınıftan tüm değişkenleri ve methodları miras alır.
 
+Sınıf; Meyve ise Nesneler; elma, muz, mango'dur.
 
+### Class(sınıf):
+bir sınıf oluşturmak için ``class`` anahtar sözcüğü kullanılır.
+```C#
+class Car 
+{
+  string color = "red";
+}
+```
+### Nesne(Object):
+Bir sınıftan nesne oluşturulur. 
 
+```C#
+class Car 
+{
+  string color = "red";
 
+  static void Main(string[] args)
+  {
+    Car myObj = new Car(); //car sınıfından myObj sınıfı oluşturdu.
+    Console.WriteLine(myObj.color);
+  }
+}
+```
 
+Not: '.' ile sınıfının içerisindeki değişkenlere erişilebilir.
 
+#### Multiple Classes and Objects(Çoklu sınıflar ve nesneler):
+##### Çoklu Nesneler:
+Bir sınıftan birden fazla nesne oluşturulabilir.
+```C#
+class Car
+{
+  string color = "red";
+  static void Main(string[] args)
+  {
+    Car myObj1 = new Car();
+    Car myObj2 = new Car();
+    Console.WriteLine(myObj1.color);
+    Console.WriteLine(myObj2.color);
+  }
+}
+```
+##### Birden Fazla Sınıf Kullanma:
+Bir sınıfın nesnesini oluşturabilir ve ona başka bir sınıftan erişebilirsiniz. Genellikle sınıfların daha iyi düzenlenmesi için kullanılır. (bir sınıf tüm alanlara ve yöntemlere sahipken, diğer sınıf yöntemi Main()(yürütülecek kodu) tutar).
 
+```C#
+//prog2.cs
+class Car 
+{
+  public string color = "red";
+}
+//prog.cs
+class Program
+{
+  static void Main(string[] args)
+  {
+    Car myObj = new Car();
+    Console.WriteLine(myObj.color);
+  }
+}
+```
+- ``Public``: Değişkenin/alanın diğer sınıflar içinde erişilebilir olduğunu belirtir.
+
+#### Class Members(Sınıf Üyeleri):
+Sınıfların içerisindeki alanlar(field) ve yöntemlere(method) sıklıkla "Sınıf üyeleri" denir.
+```C#
+class MyClass
+{
+  // Class members
+  string color = "red";        // field
+  int maxSpeed = 200;          // field
+  public void fullThrottle()   // method
+  {
+    Console.WriteLine("The car is going as fast as it can!");
+  }
+}
+```
+##### Field(Alan):
+Bir sınıfın içerisindeki değişkenlere alan(field) adı verilir, bunlara sınıfın bir nesnesini oluşturup, nokta dizimini kullanarak erişilir. Alanlar boş bırakılıp sonrasında da doldurulabilir. bu bir sınıftan birden fazla nesne oluştururken kullanışlıdır.
+```C#
+class Car 
+{
+  string color;
+  int maxSpeed = 200;
+
+  static void Main(string[] args)
+  {
+    Car myObj = new Car();
+    myObj.color = "red";
+    Console.WriteLine(myObj.color); // çıktı: red
+    Console.WriteLine(myObj.maxSpeed); // çıktı: 200
+
+    Car myObj1 = new Car();
+    myObj1.color = "blue";
+    Console.WriteLine(myObj1.color); // çıktı: blue
+    Console.WriteLine(myObj1.maxSpeed); // çıktı: 200
+  }
+}
+```
+##### Object Methods(Nesne Yöntemleri)
 
 
 
