@@ -337,9 +337,230 @@ switch (day)
     Console.WriteLine("Sunday");
     break;
 }
-
-
 ```
+
+## loop (Döngü)
+
+Döngüler, belirtilen bir koşul sağlandığı sürece bir kod bloğunu çalıştırabilir. kullanışlıdırlar çünkü zamandan tasarruf ederler, hataları azaltır ve kodun daha okunabilir olmasını sağlarlar.
+
+### While Loop:
+belirtilen koşul true olduğu sürece kod bloğunda döngü oluşturulur.
+
+```c#
+while (condition) 
+{
+  // code block to be executed
+}
+```
+
+Not: Koşulda kullanılan değişkeni arttırmayı unutmayın, aksi takdirde döngü asla sonlanmayacaktır!
+
+### Do/While Loop:
+do/while, while döngüsünün bir çeşididir. bu döngü koşulu kontrol etmeden önce kod bloğunu bir kez yürütür, ardından koşulun doğru olduğu sürece döngüyü tekrarlar. Koşul yanlış bile olsa en az bir kere çalışır.
+
+```C#
+/*
+do 
+{
+  // code block to be executed
+}
+while (condition);
+*/
+int i = 0;
+do 
+{
+  Console.WriteLine(i);
+  i++;
+}
+while (i < 5);
+```
+
+### For Loop:
+Kod bloğunda kaç kez döngü oluşturmak istediğinizi bilddiğinizde while yerine for u tercih edebilirsiniz.
+
+```C#
+/*
+for (statement 1; statement 2; statement 3) 
+{
+  // code block to be executed
+}*/
+
+for (int i = 0; i < 5; i++) 
+{
+  Console.WriteLine(i);
+}
+```
+
+- statement1: kod bloğundan önce yürütülür. sadece bir kere çalışır.
+- statement2: Kod bloğunun yürütülmesi için koşulu tanımlar.
+- statement3: Kod bloğu yürütüldükten sonra yürütülür. Her defasında çalışır.
+
+### Nested Loops(İç İçe Döngüler):
+ bir döngüyü başka bir döngünün içerisine yerleştirmek mümkündür.
+
+```C#
+// Outer loop
+for (int i = 1; i <= 2; ++i) 
+{
+  Console.WriteLine("Outer: " + i);  // Executes 2 times
+
+  // Inner loop
+  for (int j = 1; j <= 3; j++) 
+  {
+    Console.WriteLine(" Inner: " + j); // Executes 6 times (2 * 3)
+  }
+}
+```
+
+### Foreach Loop(Foreach Döngüsü):
+Foreach döngüsü:  bir koleksiyon veya dizi içerisindeki öğeleri sırayla dolaşmak için kullanılan bir döngüdür.
+
+Avantajları: Döngü sırasında koleksiyonun sınırlarını aşma riski yoktur.
+
+Dezavantaj: elemanlara doğrudan erişim sağlanamaz ve elemanlarda değişiklik yapılamaz.
+
+```C#
+/*
+foreach (type variableName in arrayName)
+{
+    // variableName ile yapılacak işlemler
+}*/
+
+//string
+string[] isimler = { "Ali", "Ayşe", "Mehmet", "Zeynep" };
+
+foreach (string isim in isimler)
+{
+    Console.WriteLine(isim);
+}
+
+//
+List<int> sayilar = new List<int> { 1, 2, 3, 4, 5 };
+
+foreach (int sayi in sayilar)
+{
+    // sayi = sayi * 2; // Geçersiz, derleme hatası
+    Console.WriteLine(sayi * 2); // Geçerli, çıktıda değişikliği gösterir
+}
+```
+
+- variableName: Döngü sırasında her bir öğeyi temsil eden değişken
+- arrayName: Üzerinde iterasyon yapılan koleksiyon(dizi, liste,vb)
+
+## Break ve Continue:
+
+### Break:
+
+swich yapısında atmak için kullanılır.
+if koşulunda koşuldan çıkmak için kullanılabilir.
+bir döngüden çıkmak için kullanılabilir.
+  
+```C#
+for (int i = 0; i < 10; i++) 
+{
+  if (i == 4) 
+  {
+    break;
+  }
+  Console.WriteLine(i);
+}
+```
+
+### Continue:
+
+Belirtilen bir koşul gerçekleştiğinde döngüdeki bir yenilemeyi keser ve döngüdeki sonraki yenilemeye geçer.
+
+```C#
+//for
+for (int i = 0; i < 10; i++) 
+{
+  if (i == 4) 
+  {
+    continue;
+  }
+  Console.WriteLine(i);
+}
+
+//while
+int i = 0;
+while (i < 10) 
+{
+  if (i == 4) 
+  {
+    i++;
+    continue;
+  }
+  Console.WriteLine(i);
+  i++;
+}
+// 4 yazılmaz, i=4 durumunda kod devam etmez döngünün başına döner ve i=5 durumundan devam eder.
+```
+
+## Arrays(Diziler)
+Diziler: Her değer için ayrı ayrı değişkenler tanımlamak yerine, tek bir değişkende birden fazla değeri toplamak için kullanılır.
+
+!! Diziyi bildirmek için değişken türü [] ile tanımlanır. değerler, {} içerisinde virgülle ayrılmış şekilde yazılır
+```C#
+string[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+```
+
+NOT: Dizi oluşturmanın birden fazla yöntemi vardır, bu yöntem sadece bir tanesi.
+
+#### Dizi Elemanlarına Erişim:
+Dizi elemanlarına index numarasına başvurarak erişilir.
+```C#
+string[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+Console.WriteLine(cars[0]); // Outputs Volvo
+```
+#### Dizi Elemanını Değiştirmek:
+```C#
+string[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+cars[0] = "Opel";
+Console.WriteLine(cars[0]);
+```
+
+#### Dizi Uzunluğu
+Dizi uzunluğu bulmak için ``Lenghth()`` özelliği kullanılabilir. Döngü kullanarak null' a gelene kadar da saydırılabilir(kötü bir ecole42 alışkanlığı).
+```C#
+string[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+Console.WriteLine(cars.Length);
+```
+#### Dizilerde Döngü:
+```C#
+string[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+for (int i = 0; i < cars.Length; i++) 
+{
+  Console.WriteLine(cars[i]);
+}
+```
+#### Dizilerde Sıralama:
+Bir çok dizi sırama yöntemi vardır, misal ``Sort()``: diziyi alfabetik veya artan şekilde sıralar.
+
+```C#
+// Sort a string
+string[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+Array.Sort(cars);
+foreach (string i in cars)
+{
+  Console.WriteLine(i);
+}
+ 
+// Sort an int
+int[] myNumbers = {5, 1, 8, 9};
+Array.Sort(myNumbers);
+foreach (int i in myNumbers)
+{
+  Console.WriteLine(i);
+}
+```
+
+
+
+
+
+
+
+
 
 
 
