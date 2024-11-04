@@ -675,9 +675,9 @@ static void Main(string[] args)
 ```
 # OOP(Nesne Yönelimli Programlama)
 
-##### Prosedürel Programlama:
+#### Prosedürel Programlama:
 Prosedürel programlama, işlemleri ve veriyi ayrı tutan bir programlama paradigmasıdır. Program, bir dizi prosedür veya fonksiyon olarak organize edilir. Basit ve küçük projelerde kullanımı kolaydır. Kodun yeniden kullanımı ve bakımı zor.
-### OOP nedir:
+## OOP nedir:
 İşlemsel programlama, veriler üzerinde işlemler gerçekleştiren prosedürler veya yöntemler yazmakla ilgilidir; nesne yönelimli programlama ise hem verileri hem de yöntemleri içeren nesneler oluşturmakla ilgilidir.
 
 Yapı: Program, sınıflar ve nesneler kullanılarak organize edilir. sınıflar, nesnelerin özelliklerini ve davranışlarını tanımlar.
@@ -689,7 +689,7 @@ Avantajlar:
 Dezavantaj:
 - prosedürel programlamaya göre daha karmaşıktır. küçük projelerde OOP bazen gereğinden fazla karmaşa oluşturabilir.
 
-#### OOP kavramlar:
+### OOP kavramlar:
 - ``Class(Sınıf)``: Nesnelerin yapısını ve davranışını tanımlayan bir şablon.
 - ``Nesne(Object)``: Sınıfların örneğidir. Sınıfta tanımlanan özelliklere ve methodlara sahiptir.
 - ``Kapsülleme(Encapsulation)``: Verilerin ve metotların bir sınıf içinde bir araya getirilmesi.
@@ -728,8 +728,8 @@ class Car
 
 Not: '.' ile sınıfının içerisindeki değişkenlere erişilebilir.
 
-#### Multiple Classes and Objects(Çoklu sınıflar ve nesneler):
-##### Çoklu Nesneler:
+### Multiple Classes and Objects(Çoklu sınıflar ve nesneler):
+#### Çoklu Nesneler:
 Bir sınıftan birden fazla nesne oluşturulabilir.
 ```C#
 class Car
@@ -744,7 +744,7 @@ class Car
   }
 }
 ```
-##### Birden Fazla Sınıf Kullanma:
+#### Birden Fazla Sınıf Kullanma:
 Bir sınıfın nesnesini oluşturabilir ve ona başka bir sınıftan erişebilirsiniz. Genellikle sınıfların daha iyi düzenlenmesi için kullanılır. (bir sınıf tüm alanlara ve yöntemlere sahipken, diğer sınıf yöntemi Main()(yürütülecek kodu) tutar).
 
 ```C#
@@ -765,7 +765,7 @@ class Program
 ```
 - ``Public``: Değişkenin/alanın diğer sınıflar içinde erişilebilir olduğunu belirtir.
 
-#### Class Members(Sınıf Üyeleri):
+### Class Members(Sınıf Üyeleri):
 Sınıfların içerisindeki alanlar(field) ve yöntemlere(method) sıklıkla "Sınıf üyeleri" denir.
 ```C#
 class MyClass
@@ -779,7 +779,7 @@ class MyClass
   }
 }
 ```
-##### Field(Alan):
+#### Field(Alan):
 Bir sınıfın içerisindeki değişkenlere alan(field) adı verilir, bunlara sınıfın bir nesnesini oluşturup, nokta dizimini kullanarak erişilir. Alanlar boş bırakılıp sonrasında da doldurulabilir. bu bir sınıftan birden fazla nesne oluştururken kullanışlıdır.
 ```C#
 class Car 
@@ -801,7 +801,7 @@ class Car
   }
 }
 ```
-##### Object Methods(Nesne Yöntemleri)
+#### Object Methods(Nesne Yöntemleri):
 
 
 
