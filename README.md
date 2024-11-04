@@ -543,7 +543,7 @@ namespace MyApplication
   }
 }
 ```
-## Multidimensional Arrays(Çok Boyutlu Diziler)
+### Multidimensional Arrays(Çok Boyutlu Diziler)
 Çok boyutlu dizi temelde dizilerin dizisidir.
 
 .
