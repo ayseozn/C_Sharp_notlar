@@ -1000,19 +1000,18 @@ class OrnekSinif
 
 NOT: Bu varsayılan davranışlar, kodun erişim güvenliğini sağlamak için önemlidir. Eğer bir sınıfın ya da üyenin erişilebilirliğini daha geniş yapmak istiyorsanız, açıkça public, protected, internal gibi erişim belirteçlerini kullanmalısınız.
 
-## Properties (Get and Set):
+## Properties(özellikler) (Get and Set):
 
-### Properties(özellikler) and Encapsulation(kapsülleme)
-#### Encapsulation(kapsülleme):
+### Encapsulation(kapsülleme):
  nesne yönelimli programlamanın temel prensiplerinden biridir ve bir sınıfın veri ve davranışlarını (metotları) bir arada tutarak, verinin doğrudan dış dünyadan erişimini kısıtlayan bir yöntemdir. Kapsülleme, bir sınıfın içindeki alanlara (fields) ve metotlara erişimi kontrol etmeye yardımcı olur, bu da veri gizliliğini ve güvenliğini sağlar.
 
  private olarak tanımlanırlar. değere erişmek veya güncellemek için get ve set kullanılır.
-##### Neden Kapsülleme:
+#### Neden Kapsülleme:
 - Sınıf üyeleri üzerinde daha sağlıklı bir kontrol sağlar.(kodun bozulma olasılığı azalır.)
 - alanlar salt okunur (yanlızca get kullanımı) veya salt yazılır (yanlızca set kullanımı) ayarlanabilir.
 - kodun diğer bölümlerini etkilemeden kodun bir bölümünü değiştirebilir.
 
-#### Properties(özellikler)
+### Properties(özellikler)
 Private değişkenlere yanlızca o sınıf içerisinden erişmemizi sağlar. ancak bazen onlara erişmemiz gerekirse get ve set özelliklerini kullanılır.
 
 - ``get``: veriye erişmek için. dönüş değeri vardır, erişmek istediğimiz veriyi döndür.
@@ -1043,7 +1042,7 @@ class Program
 - get name değişkeninin değerini döndürür.
 - set name değişkenine bir değer atar. Value anahtar sözcüğü özelliğe atadığımız değeri temsil eder.
 
-##### otomatik get ve set:
+#### otomatik get ve set:
 Otomatik özellikler, basit get ve set blokları yazmak yerine, daha kısa ve okunabilir bir söz dizimi sağlar. Eğer get ve set bloklarında özel bir mantık eklemeye ihtiyaç yoksa, otomatik özellikler daha verimli ve temiz bir yapı sunar.
 ```C#
 public class Ogrenci
@@ -1075,9 +1074,60 @@ class Program
   }
 }
 ``` 
+## Inheritance(Miras Alma)(Kalıtım)
+alanları ve yöntemleri bir sınıftan diğerine miras almak mümkündür. "Miras kavramını" iki kategoriye ayırıyoruz:
 
+- ``Derived Class``: Türetilmiş Sınıf(çocuk): Başka bir sınıftan miras alan sınıf
+- ``Base Class``: Temel Sınıf(ebeveyn): Miras alınan sınıf
 
+Bir sınıftan miras almak için ``:`` sembolü kullanılır.
 
+```C#
+class Vehicle  // base class (parent) 
+{
+  public string brand = "Ford";  // Vehicle field
+  public void honk()             // Vehicle method 
+  {                    
+    Console.WriteLine("Tuut, tuut!");
+  }
+}
+
+class Car : Vehicle  // derived class (child)
+{
+  public string modelName = "Mustang";  // Car field
+}
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    // Create a myCar object
+    Car myCar = new Car();
+
+    //myCar nesnesi üzerinde honk() yöntemini (Vehicle sınıfından) çağırın
+    myCar.honk();
+
+    // brand (Vehicle sınıfından) ve Car sınıfından modelName değerini görüntüleyin
+    Console.WriteLine(myCar.brand + " " + myCar.modelName);
+  }
+}
+```
+### Sealed Keyword
+``sealed`` anahtar kelimesi, eğer diğer sınıfların bir sınıftan miras almasını istemiyorsanız kullanılır. 
+```C#
+sealed class Vehicle 
+{
+  ...
+}
+
+class Car : Vehicle 
+{
+  ...
+}
+// hatalı bir kullanım
+```
+## Polymorphism
+### Polymorphism and Overriding Methods (Polimorfizm ve geçersiz Kılma Yöntemleri)
 
 
 
