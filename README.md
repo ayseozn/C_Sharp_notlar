@@ -802,11 +802,279 @@ class Car
 }
 ```
 #### Object Methods(Nesne Yöntemleri):
+Methodlar normalde bir sınıfa aittir ve bir sınıf nesnesinin nasıl davranacağını tanımlar. aynı field de olduğu gibi .(nokta) ile erişilebilirler.
 
+```C#
+class Car 
+{
+  string color;                 // field
+  int maxSpeed;                 // field
+  public void fullThrottle()    // method
+  {
+    Console.WriteLine("The car is going as fast as it can!"); 
+  }
 
+  static void Main(string[] args)
+  {
+    Car myObj = new Car();
+    myObj.fullThrottle();  // Call the method
+  }
+}
+```
 
+ - static bir methoda, o sınıfa ait nesne oluşturmadan da erişilebilir, ama public bir methoda sadece nesne üzerinden erişebilir.
 
+## Constructors(Yapıcılar)
+Constructors, nesneleri başlatmak için kullanılan özel bir yöntemdir. yapıcının avantajı bir sınıfın nesnesi oluşturulurken çağırılmasıdır. field(alan) için başlangıç değeri ayarlamak içinde kullanılabilir.
+```C#
+class Car
+{
+  public string model;  // Create a field
 
+  // car sınıfının constructors'ı
+  public Car()
+  {
+    model = "Mustang"; // Model için başlangıç değeri ayarlar.
+  }
+
+  static void Main(string[] args)
+  {
+    Car Ford = new Car();  // araba sınıfının nesnesini oluşturur.(yapıcı çağırılacaktır.)
+    Console.WriteLine(Ford.model);
+  }
+}
+```
+- yapıcı adının sınıf adı ile aynı olması gerektir. yapıcıların dönüş değeri olmaz.
+- yapıcılar nesne oluşturulurken ağırılır.
+- Her sınıfın varsayın bir yapıcısı vardır, kendimiz oluşturmamızın sebebi özelleştirebilmek için.
+
+### Constructors Parameters(Yapıcı Parametreleri)
+Constructorslara istenen sayıda ve çeşitte parametre eklenebilir. yapıcılarda fonksiyonlar gibi farklı parametrelerle aşırı yüklenebilir.
+```C#
+class Car
+{
+  public string model;
+  public string color;
+  public int year;
+
+  // Create a class constructor with multiple parameters
+  public Car(string modelName, string modelColor, int modelYear)
+  {
+    model = modelName;
+    color = modelColor;
+    year = modelYear;
+  }
+
+  public Car(int modelYear)
+  {
+    year = modelYear;
+  }
+
+  static void Main(string[] args)
+  {
+    Car Ford = new Car("Mustang", "Red", 1969);
+    Console.WriteLine(Ford.color + " " + Ford.year + " " + Ford.model);
+
+    Car volvo = new Car(2000);
+    model = modeli; // yapıcısında model ve rengi ayarlamadığım için burada ayarlıyorum
+    color = rengi;
+    Console.WriteLine(volvo.model);
+  }
+}
+```
+## Access Modifiers(Erişim Değiştiricileri)
+Access Modifiers; sınıflar, field(alanlar), methodlar(fonksiyonlar) ve özellikler için erişim düzeyini/görünürlüğünü ayarlamak için kullanılırlar.
+
+- ``Public``: kod tüm sınıflar için erişime açıktır.
+- ``Private``: Kod yanlızca aynı sınıf içinde erişilebilir durumdadır.
+- ``Protected``:kod aynı sınıf içinde veya bu sınıftan miras alınan bir sınıf içinde erişilebilir durumdadır.
+- ``internal``: Kod yanlızca kendi assembly'si(proje) içinde erişilebilirdir. başka assembly'den arişilemez.
+- ``protected internal``: Hem protected hem de internal gibi çalışır.
+- ``private protected``:  Yalnızca tanımlandığı sınıfın ve bu sınıftan türetilmiş aynı projedeki sınıflardan erişilebilir.
+
+### Private
+Sınıf üyelerinin yanlızca aynı sınıf içerisinde erişilmesini istiyorsak kullanırız. 
+```C#
+class Ogrenci
+{
+    private string ad; // Private alan, sınıf dışından erişilemez
+
+    private void YazdirAd() // Private metot, sınıf dışından çağrılamaz
+    {
+        Console.WriteLine("Öğrencinin adı: " + ad);
+    }
+
+    public void AyarlaAd(string yeniAd) // Public metot, sınıf dışından erişilebilir
+    {
+        ad = yeniAd;
+        YazdirAd(); // Private metot sınıf içinden çağrılabilir
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Ogrenci ogrenci = new Ogrenci();
+        ogrenci.AyarlaAd("Ali");
+        // ogrenci.YazdirAd(); // Hata verir, çünkü YazdirAd() private
+    }
+}
+
+```
+#### Private sınıf olur mu?
+Sınıfın kendisi doğrudan private tanımlanamaz. Ama bir sınıf başka bir sıfının içinde iç içe(nested) tanımlandığında private sınıf mümkün olabilir. Bu iç içe tanımlanan sınıfın yanlızca tanımlandığı sınıftan erişilmesini sağlar.
+```C#
+class DisSinif
+{
+    private class IcSinif
+    {
+        public void MesajGoster()
+        {
+            Console.WriteLine("Bu, private bir sınıfın içinden gelen bir mesaj.");
+        }
+    }
+
+    public void IcSinifOrnegiOlustur()
+    {
+        IcSinif ornek = new IcSinif();
+        ornek.MesajGoster();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        DisSinif disSinif = new DisSinif();
+        disSinif.IcSinifOrnegiOlustur();
+
+        // DisSinif.IcSinif icSinif = new DisSinif.IcSinif(); // Hata verir, çünkü IcSinif private
+    }
+}
+```
+- Not: Global Düzeyde private Sınıf: C#'ta global düzeyde (bağımsız olarak) tanımlanan bir sınıf private yapılamaz. Sınıflar, en az internal (aynı projede erişilebilir) veya public (her yerden erişilebilir) olarak tanımlanabilir.
+- Sınıfın erişimini proje düzeyinde kısıtlamak istiyorsanız internal kullanabilirsiniz.
+
+### Public
+public erişim belirteci, bir sınıfın, metotun, özelliğin, alanın veya yapının her yerden erişilebilir olmasını sağlar. public bir sınıf, tüm projelerden veya başka projelerden erişilebilir (sınıfın tanımlandığı derleme referans alındığı sürece).
+```C#
+class Car
+{
+  public string model = "Mustang";
+}
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Car myObj = new Car();
+    Console.WriteLine(myObj.model);
+  }
+}
+```
+
+### Access Modifiers belirtilmezse ne olur?
+C#'ta bir üye veya sınıf için erişim belirteci belirtilmezse varsayılan erişim belirteci, tanımlandığı bağlama (context) bağlı olarak değişir.
+
+#### Sınıflar ve Yapılar (Top-Level Classes/Structs)
+Varsayılan olarak internal olur. Sınıf veya yapı, aynı proje(assembly) içerisinden erişilebilir, ancak başka projeden erişilemezler.
+```C#
+class OrnekSinif // Varsayılan olarak 'internal'
+{
+    // Sınıf içeriği
+}
+```
+#### Sınıf Üyeleri (Fields, Methods, Properties)
+Varsayılan olarak private olur, yani tanımlandığı sınıf dışından erişilemezler.
+```C#
+class OrnekSinif
+{
+    int sayi; // Varsayılan olarak 'private'
+    void OrnekMetot() // Varsayılan olarak 'private'
+    {
+        // Metot içeriği
+    }
+}
+```
+
+NOT: Bu varsayılan davranışlar, kodun erişim güvenliğini sağlamak için önemlidir. Eğer bir sınıfın ya da üyenin erişilebilirliğini daha geniş yapmak istiyorsanız, açıkça public, protected, internal gibi erişim belirteçlerini kullanmalısınız.
+
+## Properties (Get and Set):
+
+### Properties(özellikler) and Encapsulation(kapsülleme)
+#### Encapsulation(kapsülleme):
+ nesne yönelimli programlamanın temel prensiplerinden biridir ve bir sınıfın veri ve davranışlarını (metotları) bir arada tutarak, verinin doğrudan dış dünyadan erişimini kısıtlayan bir yöntemdir. Kapsülleme, bir sınıfın içindeki alanlara (fields) ve metotlara erişimi kontrol etmeye yardımcı olur, bu da veri gizliliğini ve güvenliğini sağlar.
+
+ private olarak tanımlanırlar. değere erişmek veya güncellemek için get ve set kullanılır.
+##### Neden Kapsülleme:
+- Sınıf üyeleri üzerinde daha sağlıklı bir kontrol sağlar.(kodun bozulma olasılığı azalır.)
+- alanlar salt okunur (yanlızca get kullanımı) veya salt yazılır (yanlızca set kullanımı) ayarlanabilir.
+- kodun diğer bölümlerini etkilemeden kodun bir bölümünü değiştirebilir.
+
+#### Properties(özellikler)
+Private değişkenlere yanlızca o sınıf içerisinden erişmemizi sağlar. ancak bazen onlara erişmemiz gerekirse get ve set özelliklerini kullanılır.
+
+- ``get``: veriye erişmek için. dönüş değeri vardır, erişmek istediğimiz veriyi döndür.
+- ``set``: veriyi güncellemek için kullanılır.
+
+```C#
+class Person
+{
+  private string name; // field
+  public string Name   // property
+  {
+    get { return name; }
+    set { name = value; }
+  }
+}
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Person myObj = new Person();
+    myObj.Name = "Liam";
+    Console.WriteLine(myObj.Name);
+  }
+}
+```
+- Name özelliği, name alanıyla ilişkilendirilir. Hem özellik hem de özel alan için aynı adı kullanmak iyi bir uygulamadır, ancak ilk harfi büyük olmalıdır.
+- get name değişkeninin değerini döndürür.
+- set name değişkenine bir değer atar. Value anahtar sözcüğü özelliğe atadığımız değeri temsil eder.
+
+##### otomatik get ve set:
+Otomatik özellikler, basit get ve set blokları yazmak yerine, daha kısa ve okunabilir bir söz dizimi sağlar. Eğer get ve set bloklarında özel bir mantık eklemeye ihtiyaç yoksa, otomatik özellikler daha verimli ve temiz bir yapı sunar.
+```C#
+public class Ogrenci
+{
+    public string Ad { get; set; } // Derleyici arka planda gizli bir alan oluşturur.
+    //private string _ad; // Derleyici tarafından oluşturulan gizli alan
+
+    //public string Ad
+    //{
+    //    get { return _ad; } // get bloğu arka planda gizli alanı döndürür
+    //    set { _ad = value; } // set bloğu arka planda gizli alanı günceller
+    //}
+}
+```
+```C#
+class Person
+{
+  public string Name  // property
+  { get; set; }
+}
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Person myObj = new Person();
+    myObj.Name = "Liam";
+    Console.WriteLine(myObj.Name);
+  }
+}
+``` 
 
 
 
