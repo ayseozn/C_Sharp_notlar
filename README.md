@@ -1128,8 +1128,327 @@ class Car : Vehicle
 ```
 ## Polymorphism
 ### Polymorphism and Overriding Methods (Polimorfizm ve geçersiz Kılma Yöntemleri)
+Polimorfizm : Kalıtım yoluyla birbirleriyle ilişkili çok sayıda sınıfa sahip olduğumuzda ortaya çıkar.
 
+ Miras, başka bir sınıftan alanları ve yöntemleri miras almamızı sağlar. Polimorfizm, farklı görevleri gerçekleştirmek için bu yöntemleri kullanır. Bu, tek bir eylemi farklı şekillerde gerçekleştirmemizi sağlar.
 
+```C#
+class Animal  // Base class (parent) 
+{
+  public void animalSound() 
+  {
+    Console.WriteLine("The animal makes a sound");
+  }
+}
+
+class Cat : Animal  // Derived class (child) 
+{
+  public void animalSound() 
+  {
+    Console.WriteLine("The Cat says: meow meow");
+  }
+}
+
+class Dog : Animal  // Derived class (child) 
+{
+  public void animalSound() 
+  {
+    Console.WriteLine("The dog says: bow wow");
+  }
+}
+
+class Program 
+{
+  static void Main(string[] args) 
+  {
+    Animal myAnimal = new Animal();  // Create a Animal object
+    Animal myCat = new Cat();  // Create a Cat object
+    Animal myDog = new Dog();  // Create a Dog object
+
+    myAnimal.animalSound(); // The animal makes a sound
+    myCat.animalSound(); // The animal makes a sound
+    myDog.animalSound(); // The animal makes a sound
+  }
+}
+```
+- aynı isme sahip olduklarında temel sınıfın methodu türetilmiş sınıfın methodunu geçersiz kılar. bu yüzden üç çıktıda aynı olur.
+- Temel sınıfın methodunu geçersiz kılmak için, temel sınıfın methoduna ``virtual``, türetilmiş sınıfında methoduna ``override`` anahtar sözcüğü eklenir.
+```C#
+class Animal  // Base class (parent) 
+{
+  public virtual void animalSound() 
+  {
+    Console.WriteLine("The animal makes a sound");
+  }
+}
+
+class Cat : Animal  // Derived class (child) 
+{
+  public override void animalSound() 
+  {
+    Console.WriteLine("The cat says: meow meow");
+  }
+}
+
+class Dog : Animal  // Derived class (child) 
+{
+  public override void animalSound() 
+  {
+    Console.WriteLine("The dog says: bow wow");
+  }
+}
+
+class Program 
+{
+  static void Main(string[] args) 
+  {
+    Animal myAnimal = new Animal();  // Create a Animal object
+    Animal myCat = new Cat();  // Create a Cat object
+    Animal myDog = new Dog();  // Create a Dog object
+
+    myAnimal.animalSound(); // The animal makes a sound
+    myCat.animalSound(); // The cat says: meow meow
+    myDog.animalSound();  // The dog says: bow wow
+  }
+}
+```
+## Abstraction(Soyutlama)
+### Abstract Classes and Methods(Soyut Sınıflar ve Methodlar)
+Veri soyutlaması, belirli ayrıntıları gizleme ve kullanıcıya yalnızca temel bilgileri gösterme sürecidir.
+
+Soyutlama, Abstract Classes(soyut sınıflar) ve interfaces ile gerçekleştirilebilir.
+
+Abstract anahtar sözcüğü sınıflar ve methodlarda:
+- ``Abstract Classes``(Soyut Sınıf): Abstract sınıf, doğrudan kullanılarak nesne oluşturulamayan bir sınıf türüdür. Yani, abstract anahtar kelimesiyle tanımlanan bir sınıfın örneği (instance) yaratılamaz. Bu sınıf, genellikle diğer sınıflar için bir temel (üst) sınıf olarak kullanılır.  Alt sınıf, abstract sınıfı kalıtım yoluyla miras alır ve bu sayede onun özelliklerini ve metotlarını kullanabilir.
+- Abstract method(Soyut Method): Yanlızca soyut bir sınıfta kullanılabilir ve bir gövdesi yoktur. Gövde türetilmiş sınıf tarafından sağlanır.
+
+NOT: soyut bir sınıf hem soyut hemde normal bir methoda sahip olabilir.
+```C#
+abstract class Animal 
+{
+  public abstract void animalSound();
+  public void sleep() 
+  {
+    Console.WriteLine("Zzz");
+  }
+}
+```
+- ``Animal myObj = new Animal();`` Hatalı kullanımdır bir soyut sınıftan nesne oluşturulamaz. soyut bir sınıa erişmek için başka bir sınıf tarafından miras alınması gerekir.
+```C#
+// Abstract class
+abstract class Animal
+{
+  // Abstract method (does not have a body)
+  public abstract void animalSound();
+  // Regular method
+  public void sleep()
+  {
+    Console.WriteLine("Zzz");
+  }
+}
+
+// Derived class (inherit from Animal)
+class Cat : Animal
+{
+  public override void animalSound()
+  {
+    // The body of animalSound() is provided here
+    Console.WriteLine("The cat says: meow meow");
+  }
+}
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Pig myCat = new Cat(); // Create a Cat object
+    myCat.animalSound();  // Call the abstract method
+    myCat.sleep();  // Call the regular method
+  }
+}
+```
+## Interface
+Soyutlama yapmanın bir diğer yoluda interface dir. Interface (Arayüz), nesne yönelimli programlamada, bir sınıfın uygulaması gereken yöntemlerin ve özelliklerin bir şablonunu tanımlayan yapıdır. Sınıfların belirli bir davranış setini uygulamasını zorunlu kılarak soyutlamayı güçlendirir.
+
+- Soyut sınıflar gibi, arayüzler de nesne oluşturmak için kullanılamazlar.
+- Interface methodlarının bir gövdesi yoktur. Gövde implement sınıfı tarafından sağlanır.
+- bir interface'in kullanımı sırasında tüm methodlar geçersiz kılınmalıdır.
+- Interface özellikler ve methodlar içerebilir ama alanlar(field)/değişkenler içeremez.
+- Interfaca üyeleri varsayılan olarak abstract ve publicdir.
+- bir interface kurucu(Constructor) içeremez.
+```C#
+// Interface
+interface IAnimal 
+{
+  void animalSound(); // interface method (does not have a body)
+}
+
+// Pig "implements" the IAnimal interface
+class Pig : IAnimal 
+{
+  public void animalSound() 
+  {
+    // The body of animalSound() is provided here
+    Console.WriteLine("The pig says: wee wee");
+  }
+}
+
+class Program 
+{
+  static void Main(string[] args) 
+  {
+    Pig myPig = new Pig();  // Create a Pig object
+    myPig.animalSound();
+  }
+}
+```
+- Bir interface'in ismini I harfi ile başlatmak iyi bir uygulamadır. hem size hemde başkalarına bunun bir interface olduğunu sınıf olmadığını hatırlatacaktır.
+
+NOT: Çoklu Kalıtım: C#'ta sınıflar yalnızca bir sınıfı miras alabilir, ancak birden fazla interface'i uygulayabilirler. Bu, çoklu kalıtımın bir alternatifidir.
+
+### Multiple Interfaces (Çoklu Arayüzler)
+Birden fazla interface uygulamak için arayüzleri virgül ile ayırın
+```C#
+interface IFirstInterface 
+{
+  void myMethod(); // interface method
+}
+
+interface ISecondInterface 
+{
+  void myOtherMethod(); // interface method
+}
+
+// Implement multiple interfaces
+class DemoClass : IFirstInterface, ISecondInterface 
+{
+  public void myMethod() 
+  {
+    Console.WriteLine("Some text..");
+  }
+  public void myOtherMethod() 
+  {
+    Console.WriteLine("Some other text...");
+  }
+}
+
+class Program 
+{
+  static void Main(string[] args)
+  {
+    DemoClass myObj = new DemoClass();
+    myObj.myMethod();
+    myObj.myOtherMethod();
+  }
+}
+```
+
+## Enum(Numaralandırma)
+bir enum, bir grup sabiti(const) temsil eden özel bir sınıftır.
+
+enum oluşturmak için, enum anahtar sözcüğünü (sınıf veya interface yerine) kullanın ve enum öğelerini virgül ile ayırın.
+```C#
+enum Level 
+{
+  Low,
+  Medium,
+  High
+}
+// enum söz dizimini kullanarak öğelere erişim
+Level myVar = Level.Medium;
+Console.WriteLine(myVar);
+```
+
+- Enum, "özel olarak listelenmiş" anlamına gelen "enumerations"ın kısaltmasıdır.
+### Sınıf İçinde Enum
+```C#
+class Program
+{
+  enum Level
+  {
+    Low,
+    Medium,
+    High
+  }
+  static void Main(string[] args)
+  {
+    Level myVar = Level.Medium;
+    Console.WriteLine(myVar); // çıktı: Medium
+  }
+}
+```
+### Enum Values
+Varsayılan olarak, bir enumun ilk öğesinin değeri 0'dır. İkinci öğenin değeri 1'dir...
+
+Bir öğeden tam sayı değerini almak için, öğeyi int türüne dönüştürülmelidir.
+```C#
+enum Months
+{
+  January,    // 0
+  February,   // 1
+  March,      // 2
+  April,      // 3
+  May,        // 4
+  June,       // 5
+  July        // 6
+}
+
+static void Main(string[] args)
+{
+  int myNum = (int) Months.April;
+  Console.WriteLine(myNum); // çıktı: 3
+}
+```
+- Ayrıca kendi enum değerlerinizi atayabilirsiniz ve sonraki öğeler numaralarını buna göre güncelleyecektir:
+```C#
+enum Months
+{
+  January,    // 0
+  February,   // 1
+  March=6,    // 6
+  April,      // 7
+  May,        // 8
+  June,       // 9
+  July        // 10
+}
+
+static void Main(string[] args)
+{
+  int myNum = (int) Months.April;
+  Console.WriteLine(myNum); // çıktı: 7
+}
+```
+### Switch İfadesinde Enum
+Enumlar genellikle ifadelerde karşılık gelen değerleri kontrol etmek için Switch kullanır.
+```C#
+enum Level 
+{
+  Low,
+  Medium,
+  High
+}
+
+static void Main(string[] args) 
+{
+  Level myVar = Level.Medium;
+  switch(myVar) 
+  {
+    case Level.Low:
+      Console.WriteLine("Low level");
+      break;
+    case Level.Medium:
+       Console.WriteLine("Medium level");
+      break;
+    case Level.High:
+      Console.WriteLine("High level");
+      break;
+  }
+}
+// çıktı: Medium level
+```
+Ayın günleri, günler, renkler, iskambil destesi vb. gibi değişmeyeceğini bildiğiniz değerler olduğunda enumları kullanmak daha mantıklıdır.
+##Files
+### Dosyalarla Çalışma
 
 
 
