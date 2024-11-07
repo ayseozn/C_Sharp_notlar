@@ -1447,8 +1447,135 @@ static void Main(string[] args)
 // çıktı: Medium level
 ```
 Ayın günleri, günler, renkler, iskambil destesi vb. gibi değişmeyeceğini bildiğiniz değerler olduğunda enumları kullanmak daha mantıklıdır.
-##Files
-### Dosyalarla Çalışma
+
+## Working With Files(Dosyalarla Çalışma)
+System.IO isim alanından File sınıfı, dosyalarla çalışmamızı sağlar:
+```C#
+using System.IO;
+
+File.SomeFileMethod();
+```
+Bazı methodlar:
+- ``AppendText()``: Varolan bir dosyanın sonuna metin ekler.
+- ``Copy()``: bir dosyayı kopyalar.
+- ``Create()``: Bir dosta oluşturur ve üzerine yazar.
+- ``Delete()``: Bir dosyayı siler. 
+- ``Exists()``: Dosyanın var olup olmadığını sınar.
+- ``ReadAllText()``: Bir dosyanın içeriğii okur.
+- ``Replace()``: Bir dosyanın içeriğini başka bir dosyanın içeriği ile değiştirir.
+- ``WriteAllText()``: Yeni bir dosya oluşturur ve içeriğini bu dosyaya yazar. Dosya zaten mevcutsa, üzerine yazılır.
+
+#### Bir dosya yazma ve okuma:
+```C#
+using System.IO;  // include the System.IO namespace
+
+string writeText = "Hello World!";  // Create a text string
+File.WriteAllText("filename.txt", writeText);  // Bir dosya oluşturun ve writeText'in içeriğini bu dosyaya yazın
+
+string readText = File.ReadAllText("filename.txt");  //  Dosyanın içeriğini okuyun
+Console.WriteLine(readText);  // Output the content
+```
+## exceptions - Try..Catch
+### Exception(istisnalar)
+Kod yürütülürken farklı hatalar oluşabilir: programcı tarafından yapılan kodlama hataları, yanlış girdiden kaynaklanan hatalar veya diğer öngörülemeyen şeyler.
+
+Bir hata oluştuğunda C# normalde durur ve bir hata mesajı exception(istisna) fırlatır.
+
+### Try And Catch
+``Tray``: Yürütülürken hatalara karşı test edilebilecek bir kod bloğu tanımlamamıza olanak tanır.
+
+``Catch``: Tyr bloğunda bir hata oluşması durumunda yürütülecek kod bloğunu tanımlamanıza olanak tanır.
+
+```C#
+try 
+{
+  //  Block of code to try
+}
+catch (Exception e)
+{
+  //  Block of code to handle errors
+}
+```
+Bir hata oluşursa, hatayı yakalamak ve işlemek üzere bazı kodlar çalıştırmak için try...catch 'i kullanabiliriz.
+
+örnekte, catch bloğunun içindeki değişkeni (e), istisnayı açıklayan bir mesaj çıktısı veren yerleşik Message özelliği ile birlikte kullanıyoruz:
+```C#
+try
+{
+  int[] myNumbers = {1, 2, 3};
+  Console.WriteLine(myNumbers[10]);
+}
+catch (Exception e)
+{
+  Console.WriteLine(e.Message);
+  // Console.WriteLine("Something went wrong."); // kendi hata mesajımızı yazdırmak için.
+}
+// çıktı: Index was outside the bounds of the array.
+```
+### Finally
+``finally`` deyimi, try...catch işleminden sonra sonuç ne olursa olsun kodu çalıştırmanızı sağlar.
+```C#
+try
+{
+  int[] myNumbers = {1, 2, 3};
+  Console.WriteLine(myNumbers[10]);
+}
+catch (Exception e)
+{
+  Console.WriteLine("Something went wrong.");
+}
+finally
+{
+  Console.WriteLine("The 'try catch' is finished.");
+}
+// Çıktı:
+//Something went wrong.
+//The 'try catch' is finished.
+```
+### throw
+``throw`` deyimi, özel bir hata oluşturmanıza olanak tanır.
+
+throw deyimi bir exception class(istisna sınıfı) ile birlikte kullanılır. C#'ta birçok istisna sınıfı mevcuttur: ArithmeticException, FileNotFoundException, IndexOutOfRangeException, TimeOutException vb:
+```C#
+static void checkAge(int age)
+{
+    if (age < 18)
+    {
+        throw new ArithmeticException("Access denied - You must be at least 18 years old.");
+    }
+    else
+    {
+        Console.WriteLine("Access granted - You are old enough!");
+    }
+}
+
+static void Main(string[] args)
+{
+    try
+    {
+        checkAge(15);
+    }
+    catch (ArithmeticException ex)
+    {
+        Console.WriteLine($"Exception caught: {ex.Message}");
+    }
+}
+// çıktı: Exception caught: Access denied - You must be at least 18 years old.
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
